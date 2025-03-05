@@ -28,14 +28,12 @@ export default function RootLayout({
 }>) {
   return (
 		<html lang='en'>
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased w-full overflow-auto max-h-screen bg-[#0D0D0D]`}
-			>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0D0D0D]`}>
 				<QueryProvider>
 					<SidebarProvider>
 						<AppSidebar />
+
 						<ContainerWrapper>
-							<SidebarTrigger />
 							{children}
 						</ContainerWrapper>
 					</SidebarProvider>
