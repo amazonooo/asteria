@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import Sidebar from '../sidebar/sidebar'
 
 export default function ContainerWrapper({
 	children,
@@ -6,8 +7,9 @@ export default function ContainerWrapper({
 	children: ReactNode
 }) {
 	return (
-		<main className='w-full h-[2000px] mr-3 my-10 rounded-lg bg-[#181818] border border-white/10 overflow-y-auto'>
+		<div className='flex h-screen gap-4 bg-[#0D0D0D]'>
+			<Sidebar />
 			{children}
-		</main>
+		</div>
 	)
 }
