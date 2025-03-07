@@ -3,42 +3,29 @@
 import { twMerge } from 'tailwind-merge'
 
 import {
-	Cloud,
-	CreditCard,
-	Github,
 	Grid2x2,
-	Keyboard,
-	LifeBuoy,
 	LogOut,
-	Mail,
 	MessageCircleQuestion,
-	MessageSquare,
-	Plus,
-	PlusCircle,
 	Settings,
-	Settings2,
-	User,
-	UserPlus,
-	Users,
 } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuPortal,
 	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuSub,
-	DropdownMenuSubContent,
-	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useQuery } from '@tanstack/react-query'
+import { userService } from '@/services/user.service'
 
 export default function SidebarUser({ isCollapsed }: { isCollapsed: boolean }) {
+	const { data: user } = useQuery({
+		queryKey: ['get user'],
+		queryFn: () => userService.getUserProfile()
+	})
+
 	return (
 		<DropdownMenu>
 			<div className='pl-3.5 flex items-center w-full'>
@@ -87,7 +74,7 @@ export default function SidebarUser({ isCollapsed }: { isCollapsed: boolean }) {
 							: 'opacity-100 scale-100 w-auto'
 					)}
 				>
-					Username
+					{user?.display_name}
 				</span>
 			</div>
 		</DropdownMenu>
