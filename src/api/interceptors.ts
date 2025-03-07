@@ -2,10 +2,10 @@ import { API_URL } from '@/constants/api.constants'
 import axios from 'axios'
 
 export const axiosClassic = axios.create({
-  baseURL: API_URL,
-  headers: {
-    Accept: 'application/json',
-  }
+	baseURL: API_URL,
+	headers: {
+		Accept: 'application/json',
+	},
 })
 
 export const axiosWithAuth = axios.create({

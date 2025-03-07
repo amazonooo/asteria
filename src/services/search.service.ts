@@ -1,12 +1,16 @@
-import { axiosClassic } from '@/api/interceptors'
+import { axiosWithAuth } from '@/api/interceptors'
+import { ISearchResults } from '@/types/search.types'
 
 class SearchService {
-  async searchSporify(query: string, type: 'track' | 'artist' | 'album') {
-    const { data } = await axiosClassic.get('/search', {
-      params: { q: query, type }
-    })
-    return data
-  }
+	async search(query: string): Promise<ISearchResults | null> {
+		if (!query) return null
+
+		const { data } = await axiosWithAuth.get<ISearchResults>('/search', {
+			params: { q: query, type: 'track,artist,album' },
+		})
+
+		return data
+	}
 }
 
 export const searchService = new SearchService()
