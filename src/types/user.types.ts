@@ -12,13 +12,6 @@ export interface IUserExternalUrls {
 	spotify: string
 }
 
-export interface IUserCountry {
-	country: string
-}
-
-export interface IUserProduct {
-	product: 'premium' | 'free'
-}
 
 export interface IUser {
 	id: string
@@ -27,8 +20,8 @@ export interface IUser {
 	images: IUserImage[]
 	followers: IUserFollowers
 	external_urls: IUserExternalUrls
-	country: IUserCountry
-	product: IUserProduct
+	country: string
+	product: 'premium' | 'free'
 	uri: string
 	type: string
 }

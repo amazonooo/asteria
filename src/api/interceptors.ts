@@ -16,12 +16,19 @@ export const axiosWithAuth = axios.create({
 })
 
 axiosWithAuth.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('spotify_token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-    return config
-  },
-  (error) => Promise.reject(error)
+	async config => {
+		try {
+			const res = await fetch('/api/auth/token')
+			const data = await res.json()
+
+			if (data.access_token) {
+				config.headers.Authorization = `Bearer ${data.access_token}`
+			}
+		} catch (error) {
+			console.error('Ошибка при получении токена:', error)
+		}
+
+		return config
+	},
+	error => Promise.reject(error)
 )

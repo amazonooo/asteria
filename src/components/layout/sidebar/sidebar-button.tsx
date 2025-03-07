@@ -18,8 +18,8 @@ export default function SidebarButton({
 	return (
 		<button
 			className={cn(
-				'absolute -right-3 top-[40px] w-5 h-8 bg-neutral-800 border border-white/10 rounded-md z-50 transition-all duration-300 text-neutral-300 cursor-pointer flex items-center justify-center hover:bg-neutral-900',
-				hover ? 'opacity-100' : 'opacity-0'
+				'absolute top-[45px] w-5 h-8 bg-neutral-800 border border-white/10 rounded-md z-50 transition-all duration-300 text-neutral-300 cursor-pointer flex items-center justify-center hover:bg-neutral-900',
+				hover ? 'opacity-100' : 'opacity-0', isCollapsed ? '-right-3' : 'right-0'
 			)}
 			onClick={toggleBtn}
 		>
