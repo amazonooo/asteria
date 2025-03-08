@@ -47,7 +47,7 @@ export default function ArtistCard({ artist }: { artist: IArtist }) {
 							transition={{ duration: 0.3, ease: 'easeOut' }}
 							className='flex justify-end'
 						>
-							<button className='bg-[#1E1F1F] p-2.5 rounded-full opacity-60 hover:opacity-85 hover:bg-neutral-800 cursor-pointer transition-all duration-300'>
+							<button className='bg-[#1E1F1F] p-2.5 rounded-full opacity-70 hover:opacity-90 hover:bg-neutral-800 cursor-pointer transition-all duration-300'>
 								<RedoDot className='rotate-180 text-white' size={20} />
 							</button>
 						</motion.div>
@@ -58,11 +58,11 @@ export default function ArtistCard({ artist }: { artist: IArtist }) {
 							</button>
 
 							<div className='flex items-center gap-x-2'>
-								<button className='bg-[#1E1F1F] p-2.5 rounded-full opacity-60 hover:opacity-85 hover:bg-neutral-800 cursor-pointer transition-all duration-300'>
+								<button className='bg-[#1E1F1F] p-2.5 rounded-full opacity-70 hover:opacity-90 hover:bg-neutral-800 cursor-pointer transition-all duration-300'>
 									<MoreHorizontal className='text-white' size={20} />
 								</button>
 
-								<button className='bg-[#1E1F1F] p-2.5 rounded-full opacity-60 hover:opacity-85 hover:bg-neutral-800 cursor-pointer transition-all duration-300'>
+								<button className='bg-[#1E1F1F] p-2.5 rounded-full opacity-70 hover:opacity-90 hover:bg-neutral-800 cursor-pointer transition-all duration-300'>
 									<Heart className='text-white' size={20} />
 								</button>
 							</div>

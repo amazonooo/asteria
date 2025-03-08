@@ -187,28 +187,17 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-
-.toastify-toast {
-  position: fixed !important;
-  top: 30px !important;
-  right: 30px !important;
-}
-
 .toast-error,
 .toast-success {
-  width: 250px;
   font-size: 14px;
   border-radius: 12px;
+  color: #fff !important;
 }
 
 .toast-error {
-  background: #2D0607 !important;
-  color: #FF9EA1 !important;
-  border: 1px solid #ff9ea16e !important;
+  background: #292929 !important;
 }
 
 .toast-success {
-  background: #001F0F !important;
-  color: #59F2A6 !important;
-  border: 1px solid #59f2a66e !important;
+  background: #292929 !important;
 }

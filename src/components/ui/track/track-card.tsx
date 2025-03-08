@@ -3,32 +3,48 @@
 import { collectionService } from '@/services/collection.service'
 import { ITrack } from '@/types/search.types'
 import { trackDuraionFormatter } from '@/utils/track-duration-formatter'
-import { useMutation } from '@tanstack/react-query'
-import { Heart, HeartOff } from 'lucide-react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { FaHeart } from 'react-icons/fa'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { FaPlay } from 'react-icons/fa'
+import { Heart } from 'lucide-react'
 
-export default function TrackCard({ track }: { track: ITrack }) {
+export default function TrackCard({
+	track,
+	initialFavorite = false,
+}: {
+	track: ITrack
+	initialFavorite?: boolean
+}) {
 	const [hoveredTrack, setHoveredTrack] = useState<string | null>(null)
-	const [isLiked, setIsLiked] = useState(false)
+	const [liked, setLiked] = useState(initialFavorite)
+	const queryClient = useQueryClient()
 
-	const { mutate } = useMutation({
-		mutationKey: ['add to favorites'],
-		mutationFn: () =>
-			isLiked
-				? collectionService.removeTrackFromFavorites(track.id)
-				: collectionService.addTrackToFavorites(track.id),
+	useEffect(() => {
+		setLiked(initialFavorite)
+	}, [initialFavorite])
+
+	const { mutate: addToFavorites } = useMutation({
+		mutationKey: ['addToFavorites'],
+		mutationFn: () => collectionService.addTrackToFavorites(track.id),
 		onSuccess: () => {
-			setIsLiked(!isLiked)
-			toast.success(
-				`Трек ${track.name} ${isLiked ? 'удален из' : 'добавлен в'} избранное`
-			)
+			setLiked(true)
+			queryClient.invalidateQueries({ queryKey: ['favoriteTracks'] })
+			toast.success(`Трек ${track.name} добавлен в избранное`)
 		},
-		onError: () => toast.error('Ошибка при изменении состояния трека'),
 	})
 
+	const { mutate: removeFromFavorites } = useMutation({
+		mutationKey: ['removeFromFavorites'],
+		mutationFn: () => collectionService.removeTrackFromFavorites(track.id),
+		onSuccess: () => {
+			setLiked(false)
+			queryClient.invalidateQueries({ queryKey: ['favoriteTracks'] })
+			toast.success(`Трек ${track.name} удален из избранного`)
+		},
+	})
 
 	return (
 		<li
@@ -45,9 +61,7 @@ export default function TrackCard({ track }: { track: ITrack }) {
 						width={45}
 						height={45}
 						className='h-full w-full rounded-md object-cover transition-opacity duration-300'
-						style={{
-							opacity: hoveredTrack === track.id ? 0.5 : 1,
-						}}
+						style={{ opacity: hoveredTrack === track.id ? 0.5 : 1 }}
 					/>
 					{hoveredTrack === track.id && (
 						<span className='absolute flex justify-center items-center rounded-full h-6 w-6 bg-white transition-all duration-300 opacity-100 hover:scale-105'>
@@ -65,22 +79,20 @@ export default function TrackCard({ track }: { track: ITrack }) {
 				</span>
 			</span>
 			<span className='flex gap-x-10 items-center'>
-				<span className='text-neutral-400 mt-1'>
-					<Heart
-						className='hover:text-neutral-200 transition-colors duration-300'
-						size={18}
-						onClick={() => mutate()}
-					/>
-				</span>
-				<span
-					className={`text-neutral-400 mt-1 transition-opacity duration-300 ${
-						hoveredTrack === track.id ? 'opacity-100' : 'opacity-0'
-					}`}
-				>
-					<HeartOff
-						className='hover:text-neutral-200 transition-colors duration-300'
-						size={18}
-					/>
+				<span className='mt-1'>
+					{liked ? (
+						<FaHeart
+							className='text-rose-400 cursor-pointer hover:scale-105 transition-transform duration-300'
+							size={18}
+							onClick={() => removeFromFavorites()}
+						/>
+					) : (
+						<Heart
+							className='text-neutral-400 cursor-pointer hover:scale-105 transition-transform duration-300'
+							size={18}
+							onClick={() => addToFavorites()}
+						/>
+					)}
 				</span>
 				<span className='text-neutral-400'>
 					{trackDuraionFormatter(track.duration_ms)}

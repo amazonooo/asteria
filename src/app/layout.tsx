@@ -38,10 +38,9 @@ export default function RootLayout({
 			>
 				<QueryProvider>
 					<SidebarProvider>
-						<ContainerWrapper>{children}</ContainerWrapper>
 						<Toaster
 							containerClassName='toastify-toast'
-							position='top-right'
+							position='bottom-center'
 							containerStyle={{
 								color: 'white',
 								userSelect: 'none',
@@ -58,6 +57,7 @@ export default function RootLayout({
 								duration: 2000,
 							}}
 						/>
+						<ContainerWrapper>{children}</ContainerWrapper>
 					</SidebarProvider>
 				</QueryProvider>
 			</body>

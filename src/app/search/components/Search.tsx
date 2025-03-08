@@ -4,12 +4,7 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { searchService } from '@/services/search.service'
 import { Input } from '@/components/ui/input'
-import Image from 'next/image'
 import { IAlbum, IArtist, ISearchResults, ITrack } from '@/types/search.types'
-import { FaPlay } from 'react-icons/fa'
-import { twMerge } from 'tailwind-merge'
-import { trackDuraionFormatter } from '@/utils/track-duration-formatter'
-import { Heart, HeartOff } from 'lucide-react'
 import SearchTrack from './SearchTrack'
 import SearchAlbum from './SearchAlbum'
 import SearchArtists from './SearchArtists'
@@ -45,7 +40,7 @@ export default function Search() {
 						className={`cursor-pointer px-4 py-2 rounded-full ${
 							activeTab === tab
 								? 'bg-teal-100 text-black'
-								: 'bg-[#333333] text-white'
+								: 'bg-[#333333] text-white hover:bg-neutral-700 transition-colors duration-300'
 						}`}
 					>
 						{tab === 'top' && 'Топ'}

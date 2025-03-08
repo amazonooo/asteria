@@ -11,7 +11,7 @@ export default function ContainerWrapper({
 			<Sidebar />
 
 			<div className='flex-1 flex flex-col py-6 pr-4 pl-3 overflow-hidden'>
-				<main className='flex-1 overflow-x-hidden bg-[#121212] rounded-lg border border-[#1B1B1B] shadow-lg custom-scrollbar px-6 py-7'>
+				<main className='flex-1 overflow-x-hidden bg-[#121212] rounded-lg border border-[#1B1B1B] shadow-lg custom-scrollbar p-6'>
 					{children}
 				</main>
 			</div>
