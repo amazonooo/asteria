@@ -52,7 +52,7 @@ export default function SidebarUser({ isCollapsed }: { isCollapsed: boolean }) {
 				{isAuthenticated && (
 					<>
 						<DropdownMenuTrigger>
-							<Avatar className='select-none cursor-pointer w-[2.5rem] h-[2.5rem]'>
+							<Avatar className='select-none cursor-pointer w-[2.5rem] h-[2.5rem] hover:scale-110 transition-transform duration-300'>
 								<AvatarImage src={user?.images[1].url} alt='avatar' />
 							</Avatar>
 						</DropdownMenuTrigger>
