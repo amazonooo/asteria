@@ -1,14 +1,34 @@
 'use client'
 
+import { collectionService } from '@/services/collection.service'
 import { ITrack } from '@/types/search.types'
 import { trackDuraionFormatter } from '@/utils/track-duration-formatter'
+import { useMutation } from '@tanstack/react-query'
 import { Heart, HeartOff } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { FaPlay } from 'react-icons/fa'
 
 export default function TrackCard({ track }: { track: ITrack }) {
 	const [hoveredTrack, setHoveredTrack] = useState<string | null>(null)
+	const [isLiked, setIsLiked] = useState(false)
+
+	const { mutate } = useMutation({
+		mutationKey: ['add to favorites'],
+		mutationFn: () =>
+			isLiked
+				? collectionService.removeTrackFromFavorites(track.id)
+				: collectionService.addTrackToFavorites(track.id),
+		onSuccess: () => {
+			setIsLiked(!isLiked)
+			toast.success(
+				`Трек ${track.name} ${isLiked ? 'удален из' : 'добавлен в'} избранное`
+			)
+		},
+		onError: () => toast.error('Ошибка при изменении состояния трека'),
+	})
+
 
 	return (
 		<li
@@ -49,6 +69,7 @@ export default function TrackCard({ track }: { track: ITrack }) {
 					<Heart
 						className='hover:text-neutral-200 transition-colors duration-300'
 						size={18}
+						onClick={() => mutate()}
 					/>
 				</span>
 				<span

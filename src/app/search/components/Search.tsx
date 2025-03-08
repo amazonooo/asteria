@@ -28,7 +28,7 @@ export default function Search() {
 	})
 
 	return (
-		<div className='px-6 py-7 bg-[#121212] rounded-xl border border-[#1B1B1B]'>
+		<div>
 			<Input
 				type='text'
 				placeholder='Введите название...'
@@ -62,11 +62,18 @@ export default function Search() {
 						<>
 							<h2 className='text-2xl font-semibold mb-5'>Лучшие результаты</h2>
 							<div className='flex flex-col'>
-								<ul className='flex justify-between'>
-									{data?.artists?.items.slice(0, 7).map((artist: IArtist) => (
-										<ArtistCard artist={artist} key={artist.id} />
-									))}
-								</ul>
+								<div className='flex'>
+									<ul className='flex gap-x-8'>
+										{data?.artists?.items.slice(0, 2).map((artist: IArtist) => (
+											<ArtistCard artist={artist} key={artist.id} />
+										))}
+									</ul>
+									<ul className='flex ml-10 gap-x-10'>
+										{data.albums?.items.slice(0, 4).map((album: IAlbum) => (
+											<AlbumCard album={album} key={album.id} />
+										))}
+									</ul>
+								</div>
 								<div className='mt-12'>
 									<h2 className='text-2xl font-semibold mb-5'>Треки</h2>
 									<ul className='flex flex-col gap-y-2'>
@@ -77,7 +84,7 @@ export default function Search() {
 								</div>
 								<div className='mt-12'>
 									<h2 className='text-2xl font-semibold mb-5'>Альбомы</h2>
-									<ul className='grid lg:grid-cols-5 xl:grid-cols-6 items-center gap-y-10 gap-x-10'>
+									<ul className='flex items-center gap-y-10 gap-x-10'>
 										{data.albums?.items.slice(0, 7).map((album: IAlbum) => (
 											<AlbumCard album={album} key={album.id} />
 										))}

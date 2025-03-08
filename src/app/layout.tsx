@@ -5,6 +5,8 @@ import { QueryProvider } from '@/providers/query-provider'
 import ContainerWrapper from '@/components/layout/container/container-wrapper'
 import { SidebarProvider } from '@/providers/sidebar-provider'
 import { PROJECT_DESCRIPTION, PROJECT_NAME } from '@/constants/seo.constants'
+import { Toaster } from 'react-hot-toast'
+import { CircleCheck, CircleX } from 'lucide-react'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +39,25 @@ export default function RootLayout({
 				<QueryProvider>
 					<SidebarProvider>
 						<ContainerWrapper>{children}</ContainerWrapper>
+						<Toaster
+							containerClassName='toastify-toast'
+							position='top-right'
+							containerStyle={{
+								color: 'white',
+								userSelect: 'none',
+							}}
+							toastOptions={{
+								success: {
+									className: 'toast-success',
+									icon: <CircleCheck className='text-[#59f2a6]' />,
+								},
+								error: {
+									className: 'toast-error',
+									icon: <CircleX className='text-[#ff9EA1]' />,
+								},
+								duration: 2000,
+							}}
+						/>
 					</SidebarProvider>
 				</QueryProvider>
 			</body>

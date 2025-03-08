@@ -7,8 +7,10 @@ const REDIRECT_URI = process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI!
 const AUTH_URL = 'https://accounts.spotify.com/api/token'
 
 export const getSpotifyAuthUrl = () => {
-	const scope = encodeURIComponent('user-read-private user-read-email')
-	return `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${scope}`
+	const scope = encodeURIComponent(
+		'user-read-private user-read-email user-follow-read playlist-modify-private playlist-modify-public user-library-read user-library-modify'
+	)
+	return `https://accounts.spotify.com/authorize?client_id=${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri=${process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI}&scope=${scope}`
 }
 
 export const getAccessToken = async (code: string) => {

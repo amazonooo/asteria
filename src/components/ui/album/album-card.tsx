@@ -76,6 +76,7 @@ export default function ArtistCard({ album }: { album: IAlbum }) {
 					<h2 className='text-neutral-400 text-sm font-medium'>
 						{album.artists[0].name}
 					</h2>
+					<span className='bg-neutral-400 w-1 h-1 mt-0.5 rounded-full' />
 					<p className='text-neutral-400 text-sm font-medium'>
 						{album.release_date.slice(0, 4)}
 					</p>

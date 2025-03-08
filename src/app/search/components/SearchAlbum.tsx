@@ -7,7 +7,7 @@ export default function SearchAlbum({ data }: { data: any }) {
 		<>
 			<ul className='grid lg:grid-cols-5 xl:grid-cols-6 items-center gap-y-10 gap-x-10'>
 				{data?.albums?.items.map((album: IAlbum) => (
-					<AlbumCard album={album} />
+					<AlbumCard album={album} key={album.id} />
 				))}
 			</ul>
 		</>
