@@ -22,6 +22,7 @@ export interface ITrack {
 	artists: IArtist[]
 	duration_ms: number
 	preview_url: string | null
+	uri: string
 }
 
 export interface ISearchResults {

@@ -39,7 +39,7 @@ export default function SidebarUser({ isCollapsed }: { isCollapsed: boolean }) {
 
 	return (
 		<DropdownMenu>
-			<div className='pl-3.5 flex items-center w-full'>
+			<div className='pl-[13px] flex items-center w-full'>
 				{!isAuthenticated && (
 					<Button
 						variant={'secondary'}
